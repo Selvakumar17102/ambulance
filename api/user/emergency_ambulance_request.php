@@ -106,7 +106,7 @@
                         $order_id = 0;
                     }
 
-                    $order_string = 'IA'.date('dm').$order_id;
+                    $order_string = 'SL'.date('dm').$order_id;
 
                     if($msg == "Without Drop Location" || $msg == "With Drop Location"){
                         $sql = "INSERT INTO orders (order_string,trip_string,user_id,login_id,booking_date,booking_time,order_status,total_amount,service_type,pickup_address,pickup_latitude,pickup_longitude,drop_address,drop_latitude,drop_longitude,delivery_partner_id,travel_distance,amount_for_client,pickup_otp,payment_type) VALUES ('$order_string','$tripString','$user_id','$branch_id','$booking_date','$booking_time','$order_status','$total_amount','$service_type','$pickup_address','$pickup_latitude','$pickup_longitude','$drop_address','$drop_latitude','$drop_longitude','$ambulance_id','$travel_distance','$amount_for_client','$pickup_otp','$payment_type')";

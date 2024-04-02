@@ -257,6 +257,9 @@
                             <li class="<?php echo $ambulanceDriverReport ?>">
                                 <a href="ambulanceDriverReport.php"> Ambulance Driver </a>
                             </li>
+                            <li class="<?php echo $triptimeReport ?>">
+                                <a href="triptiming.php"> Trip Timing </a>
+                            </li>
                             <li class="<?php echo $donoruserReport ?>">
                                 <a href="donorreportlist.php"> Donor list </a>
                             </li>

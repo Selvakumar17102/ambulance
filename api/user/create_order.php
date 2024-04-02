@@ -83,7 +83,7 @@
                         $order_id = 0;
                     }
 
-                    $order_string = 'IA'.date('dm').$order_id;
+                    $order_string = 'SL'.date('dm').$order_id;
 
                     $sql2 = "SELECT * FROM orders WHERE delivery_partner_id='$ambulance_id'";
                     $result2 = $conn->query($sql2);
