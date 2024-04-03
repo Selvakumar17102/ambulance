@@ -1,9 +1,9 @@
 <?php
     ini_set('display_errors','off');
     include('include/connection.php');
-    $setting = 'active';
-    $settingShow = 'show';
-    $settingBoolean = 'true';
+    $menu = 'active';
+    $menuShow = 'show';
+    $menuBoolean = 'true';
     $paymentMode = 'active';
 ?>
 <!DOCTYPE html>

@@ -119,6 +119,13 @@
                             </div>
                         </a>
                         <ul class="collapse submenu list-unstyled <?php echo $menuShow ?>" id="dashboard" data-parent="#accordionExample">
+                            <li class="<?php echo $controls ?>">
+                                <a href="control.php"> App Controls </a>
+                            </li>
+                            <li class="<?php echo $paymentMode ?>">
+                                <a href="payment.php"> Payment Modes </a>
+                            </li>
+
                             <li class="<?php echo $branch ?>">
                                 <a href="branch.php"> City </a>
                             </li>
@@ -231,7 +238,7 @@
                         </a>
                     </li>
 
-                    <li class="menu <?php echo $setting ?>">
+                    <!-- <li class="menu <?php echo $setting ?>">
                         <?php
                             if($settingBoolean != 'true'){
                                 $settingBoolean = 'false';
@@ -254,7 +261,7 @@
                                 <a href="payment.php"> Payment Modes </a>
                             </li>
                         </ul>
-                    </li>
+                    </li> -->
 
                     <!-- <li class="menu <?php echo $report ?>">
                         <?php

@@ -1,9 +1,9 @@
 <?php
     include('include/connection.php');
-    $setting = 'active';
-    $settingShow = 'show';
-    $settingBoolean = 'true';
-    $control = 'active';
+    $menu = 'active';
+    $menuShow = 'show';
+    $menuBoolean = 'true';
+    $controls = 'active';
 
     if(isset($_POST['add'])){
         $percentage_to_client = $_POST['percentage_to_client'];
@@ -103,7 +103,7 @@
                             <div class="widget-header">
                                 <div class="row">
                                     <div class="col-sm-10">
-                                        <h4>Instant Ambulance</h4>
+                                        <h4>Salvo Ambulance</h4>
                                     </div>
                                 </div>
                             </div>
