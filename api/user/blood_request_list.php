@@ -26,8 +26,8 @@
                     $donarlong = $donorrow['donor_longitude'];
 
                     $bloodgrp = $donorrow['blood_group'];
-
-                    $reqSql ="SELECT *, a.request_reason AS requestReason FROM blood_request a LEFT OUTER JOIN bloodlist b ON a.blood_group = b.blood_id LEFT OUTER JOIN request_reason c ON c.reason_id = a.request_reason WHERE a.blood_group = '$bloodgrp'";
+                    $yesterday = date('Y-m-d',strtotime("-1 days"));
+                    $reqSql ="SELECT *, a.request_reason AS requestReason FROM blood_request a LEFT OUTER JOIN bloodlist b ON a.blood_group = b.blood_id LEFT OUTER JOIN request_reason c ON c.reason_id = a.request_reason WHERE a.blood_group = '$bloodgrp' AND a.request_date > '$yesterday'";
                     $reqResult = $conn->query($reqSql);
                     $i = 0;
                     if($reqResult->num_rows > 0){

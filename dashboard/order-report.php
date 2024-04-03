@@ -1,9 +1,9 @@
 <?php
     ini_set('display_errors','off');
     include('include/connection.php');
-    $report = 'active';
-    $reportShow = 'show';
-    $reportBoolean = 'true';
+    $menu = 'active';
+    $menuShow = 'show';
+    $menuBoolean = 'true';
     $orderReport = 'active';
 
     $start = $end = '';

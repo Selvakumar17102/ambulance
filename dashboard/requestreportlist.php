@@ -2,9 +2,9 @@
     ini_set('display_errors','off');
     include('include/connection.php');
 
-    $report = 'active';
-    $reportShow = 'show';
-    $reportBoolean = 'true';
+    $blood = 'active';
+    $bloodBoolean = 'true';
+    $bloodShow = 'show';
     $requestuserReport = 'active';
 
     // $start = $end = '';

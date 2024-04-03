@@ -2,9 +2,9 @@
     ini_set('display_errors','on');
     include('include/connection.php');
     include("../api/password.php");
-    $setting = 'active';
-    $settingShow = 'show';
-    $settingBoolean = 'true';
+    $menu = 'active';
+    $menuShow = 'show';
+    $menuBoolean = 'true';
     $branch = 'active';
 
     if(isset($_POST['add'])){

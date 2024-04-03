@@ -1,9 +1,9 @@
 <?php
     ini_set('display_errors','on');
     include('include/connection.php');
-    $setting = 'active';
-    $settingShow = 'show';
-    $settingBoolean = 'true';
+    $menu = 'active';
+    $menuShow = 'show';
+    $menuBoolean = 'true';
     $banner = 'active';
 
     if(isset($_POST['add'])){

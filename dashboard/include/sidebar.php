@@ -92,6 +92,15 @@
                             <li class="<?php echo $requestReason ?>">
                                 <a href="request-reason.php">Request Reason</a>
                             </li>
+                            <hr>
+                            <a href="#"><b>Report</b></a>
+                            <li class="<?php echo $donoruserReport ?>">
+                                <a href="donorreportlist.php"> Donor list Report</a>
+                            </li>
+                            <li class="<?php echo $requestuserReport ?>">
+                                <a href="requestreportlist.php"> Request list Report</a>
+                            </li>
+                            <hr>
                         </ul>
                     </li>
                     <li class="menu <?php echo $menu ?>">
@@ -110,6 +119,12 @@
                             </div>
                         </a>
                         <ul class="collapse submenu list-unstyled <?php echo $menuShow ?>" id="dashboard" data-parent="#accordionExample">
+                            <li class="<?php echo $branch ?>">
+                                <a href="branch.php"> City </a>
+                            </li>
+                            <li class="<?php echo $banner ?>">
+                                <a href="banners.php"> Banners </a>
+                            </li>
                             <li class="<?php echo $category ?>">
                                 <a href="category.php"> Category </a>
                             </li>
@@ -119,6 +134,18 @@
                             <li class="<?php echo $ambulanceDriverRequest ?>">
                                 <a href="ambulanceDriverRequest.php"> Driver Request </a>
                             </li>
+                            <hr>
+                            <a href="#"><b>Report</b></a>
+                            <li class="<?php echo $orderReport ?>">
+                                <a href="order-report.php"> Trip Report</a>
+                            </li>
+                            <li class="<?php echo $ambulanceDriverReport ?>">
+                                <a href="ambulanceDriverReport.php"> Ambulance Driver Report</a>
+                            </li>
+                            <li class="<?php echo $triptimeReport ?>">
+                                <a href="triptiming.php"> Trip Timing Report</a>
+                            </li>
+                            <hr>
                         </ul>
                     </li>
                     <!-- <li class="menu <?php echo $order ?>">
@@ -220,12 +247,6 @@
                             </div>
                         </a>
                         <ul class="collapse submenu list-unstyled <?php echo $settingShow ?>" id="setting" data-parent="#accordionExample">
-                            <li class="<?php echo $branch ?>">
-                                <a href="branch.php"> City </a>
-                            </li>
-                            <li class="<?php echo $banner ?>">
-                                <a href="banners.php"> Banners </a>
-                            </li>
                             <li class="<?php echo $control ?>">
                                 <a href="control.php"> App Controls </a>
                             </li>
@@ -235,7 +256,7 @@
                         </ul>
                     </li>
 
-                    <li class="menu <?php echo $report ?>">
+                    <!-- <li class="menu <?php echo $report ?>">
                         <?php
                             if($reportBoolean != 'true'){
                                 $reportBoolean = 'false';
@@ -267,7 +288,7 @@
                                 <a href="requestreportlist.php"> Request list </a>
                             </li>
                         </ul>
-                    </li>
+                    </li> -->
                     
                     <!-- <li class="menu <?php echo $bloodreport ?>">
                         <?php
