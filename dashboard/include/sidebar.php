@@ -25,36 +25,7 @@
                             </div>
                         </a>
                     </li>
-                    <li class="menu <?php echo $location ?>">
-                        <?php
-                            if($locationBoolean != 'true'){
-                                $locationBoolean = 'false';
-                            }
-                        ?>
-                        <a href="#location" data-toggle="collapse" aria-expanded="<?php echo $locationBoolean ?>" class="dropdown-toggle">
-                            <div class="">
-                                <img style="width: 30px;padding-right: 5px;" src="assets/img/icon/branch.png" alt="">
-                                <span>Location</span>
-                            </div>
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                            </div>
-                        </a>
-                        <ul class="collapse submenu list-unstyled <?php echo $locationShow ?>" id="location" data-parent="#accordionExample">
-                            <li class="<?php echo $country ?>">
-                                <a href="country.php">country</a>
-                            </li>
-                            <li class="<?php echo $state ?>">
-                                <a href="state.php">state</a>
-                            </li>
-                            <li class="<?php echo $district ?>">
-                                <a href="district.php">district</a>
-                            </li>
-                            <li class="<?php echo $city ?>">
-                                <a href="city.php">city</a>
-                            </li>
-                        </ul>
-                    </li>
+                   
                     <li class="menu <?php echo $blood ?>">
                         <?php
                             if($bloodBoolean != 'true'){
@@ -236,6 +207,37 @@
                                 <span>Users</span>
                             </div>
                         </a>
+                    </li>
+
+                    <li class="menu <?php echo $location ?>">
+                        <?php
+                            if($locationBoolean != 'true'){
+                                $locationBoolean = 'false';
+                            }
+                        ?>
+                        <a href="#location" data-toggle="collapse" aria-expanded="<?php echo $locationBoolean ?>" class="dropdown-toggle">
+                            <div class="">
+                                <img style="width: 30px;padding-right: 5px;" src="assets/img/icon/branch.png" alt="">
+                                <span>Location</span>
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            </div>
+                        </a>
+                        <ul class="collapse submenu list-unstyled <?php echo $locationShow ?>" id="location" data-parent="#accordionExample">
+                            <li class="<?php echo $country ?>">
+                                <a href="country.php">country</a>
+                            </li>
+                            <li class="<?php echo $state ?>">
+                                <a href="state.php">state</a>
+                            </li>
+                            <li class="<?php echo $district ?>">
+                                <a href="district.php">district</a>
+                            </li>
+                            <li class="<?php echo $city ?>">
+                                <a href="city.php">city</a>
+                            </li>
+                        </ul>
                     </li>
 
                     <!-- <li class="menu <?php echo $setting ?>">

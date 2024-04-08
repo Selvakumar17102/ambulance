@@ -1,6 +1,7 @@
 <?php
 	include("import.php");
     include("../onesignaluser.php");
+    include("../actiononesignaldelivery.php");
     include("../onesignaldelivery.php");
 	date_default_timezone_set("Asia/Calcutta");
 
@@ -100,6 +101,7 @@
                         $order_id = $conn->insert_id;
 
                         $res = sendNotificationDelivery($ambulance_id, $driverTitle, "New Booking!", '', $order_id, '1', '');
+                        $res = actionSendNotificationDelivery($ambulance_id, $driverTitle, "New Booking!", '', $order_id, '1', '');
                         $res = sendNotificationUser($user_id, $title, 'Your ambulance request has been sent successfully!', '', $order_id, '1');
 
                         $output_array['status'] = true;

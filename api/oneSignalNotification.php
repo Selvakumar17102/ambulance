@@ -22,7 +22,7 @@
             'android_sound' =>'notification',
             "big_picture" => $img,
             'small_icon' => "notify_icon",
-            'large_icon' => "https://instantambulance.in/dashboard/assets/img/favicon.ico",
+            'large_icon' => "https://salvo.gtechlab.in/dashboard/assets/img/favicon.ico",
             'content_available' => true,
             "ios_attachments" => $ios_img,
             'priority' => 10,

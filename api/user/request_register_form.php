@@ -1,6 +1,7 @@
 <?php
 	include("import.php");
     include("../onesignaluser.php");
+    include("../actiononesignaluser.php");
     include("../onesignaldelivery.php");
 	date_default_timezone_set("Asia/Calcutta");
 
@@ -48,6 +49,7 @@
 								$donor_id = $blood_donation_row['user_id'];
                     			$title = 'Hi '.$blood_donation_row['blood_donor_name'];
 								$res = sendNotificationUser($donor_id, $title, "Urgent Need .'$blood_group'. Blood !", '', $request_id, '1');
+								$res = actionsendNotificationUser($donor_id, $title, "Urgent Need .'$blood_group'. Blood !", '', $request_id, '1');
 							}
 						}
 						

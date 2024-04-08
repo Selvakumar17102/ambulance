@@ -1,8 +1,7 @@
 <?php
-    function sendNotificationUser($to, $title, $message, $img, $order_id, $order_status)
+    function actionSendNotificationDelivery($to, $title, $msg, $img, $order_id, $order_status, $linkURL)
     {
         $to = (string)$to;
-        $msg = $message;
         $content = array(
             "en" => $msg
         );
@@ -14,12 +13,10 @@
             "id1" => $img
         );
         $fields = array(
-            'app_id' => '445d6ab9-c0ae-4aab-b802-992d0c1a4b0c',
+            'app_id' => '7e282bb1-7d6a-4be7-a9cf-efbae6e38dc9',
             "headings" => $headings,
             'include_external_user_ids' => array($to),
             "channel_for_external_user_ids" => "push",
-            "isIos" => true,
-            "isAndroid" => true,
             'contents' => $content,
             'android_sound' =>'notification',
             "big_picture" => $img,
@@ -27,15 +24,15 @@
             'large_icon' => "https://salvo.gtechlab.in/dashboard/assets/img/favicon.ico",
             'content_available' => true,
             "ios_attachments" => $ios_img,
-            'priority' => 10,
-            "data" => (object)array("order_id"=> $order_id,"order_status"=>"$order_status","type"=>0,"category_id"=>0),
-            "notification" => (object)array("order_id"=> $order_id,"order_status"=>"$order_status","type"=>0,"category_id"=>0),
-            "android_channel_id" => "f460dc8d-88a2-49ba-8a1f-4f691e6b96f7"
+            "priority" => 10,
+            "data" => (object)array("order_id"=> $order_id,"order_status"=>"$order_status","type"=>0,"linkURL"=> $linkURL),
+            "buttons" => array(["id"=> "accept_button", "text"=> "Accept", "icon"=> ""],["id"=> "reject_button", "text"=> "Reject", "icon"=> ""]),
+            "notification" => (object)array("order_id"=> $order_id,"order_status"=>"$order_status","type"=>0,"linkURL"=> $linkURL),
+            "android_channel_id"=> "3a91c9c9-3074-4298-bb3b-92c20a8a1142"
         );
-
-        
+        // print_r($fields['include_external_user_ids']);
         $headers = array(
-            'Authorization: Basic YzM2MTNiMjktOWQ1ZS00NDU0LWJjMWQtMDZkYjdlY2FjZTI4',
+            'Authorization: Basic MjU2ZTYyNDgtOGM0Ni00ZGJkLTg5N2QtMTVkOGI3MjhmZDU1',
             'Content-Type: application/json; charset=utf-8'
         );
         $ch = curl_init();
@@ -50,6 +47,4 @@
         return $result;
     }
 
-    // $res = sendNotificationUser("1",'HI',"HRU",'','123','1');
-    // echo $res;
 ?>

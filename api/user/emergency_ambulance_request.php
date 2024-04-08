@@ -1,6 +1,7 @@
 <?php
 	include("import.php");
     include("../onesignaluser.php");
+    include("../actiononesignaldelivery.php");
     include("../onesignaldelivery.php");
 	date_default_timezone_set("Asia/Calcutta");
 
@@ -117,6 +118,7 @@
                             
                             if($msg == "With Drop Location"){
                                 $res = sendNotificationDelivery($ambulance_id, $driverTitle, "New Booking!", '', $order_id, '1', '');
+                                $res = actionSendNotificationDelivery($ambulance_id, $driverTitle, "New Booking!", '', $order_id, '1', '');
                             }
                             elseif($msg == "Without Drop Location"){
                                 $deliveryPartners = []; // Initialize an empty array to store delivery partners
@@ -148,6 +150,7 @@
                                     $driverTitle = "Hi ".$delivery_partner_name;
 
                                     $res = sendNotificationDelivery($ambulance_id, $driverTitle, "New Booking!", '', $order_id, '1', '');
+                                    $res = actionSendNotificationDelivery($ambulance_id, $driverTitle, "New Booking!", '', $order_id, '1', '');
                                 }
                             }
                             
