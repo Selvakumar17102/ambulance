@@ -41,6 +41,26 @@
             header('Location: control.php?msg=Controls updated!');
         }
     }
+
+    if(isset($_POST['kmpricesubmit'])){
+
+        
+        $sql = "TRUNCATE TABLE emergency_ambulace_price";
+        
+        if($conn->query($sql) === TRUE){
+            for($i=0;$i<count($_POST['km']);$i++){
+                
+                // $name = mysqli_real_escape_string($conn,$_POST['name'][$i]);
+                $start = $_POST['km'][$i];
+                $end = $_POST['price'][$i];
+                // $max_delivery_count = $_POST['max_delivery_count'][$i];
+
+                $sql = "INSERT INTO emergency_ambulace_price (km,price) VALUES ('$start','$end')";
+                $conn->query($sql);
+            }
+            header("Location: control.php?msg=price updated!");
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -152,6 +172,94 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-sm-12">
+                        <div class="statbox widget box box-shadow">
+                            <div class="widget-header">
+                                <div class="row">
+                                    <div class="col-sm-10">
+                                        <h4>Salvo ambulance km based price</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="widget-content widget-content-area">
+                                <div class="row mb-3">
+                                    <div class="col-sm-5">
+                                        <p class="text-center">Km</p>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <p class="text-center">Price</p>
+                                    </div>                                   
+                                    <div class="col-sm-1"></div>
+                                </div>
+                                <form method="post" enctype="multipart/form-data">
+                                    <div class="form-group m-b30" id="duplicate">
+                                        <?php
+                                            $sql = "SELECT * FROM emergency_ambulace_price";
+                                            $result = $conn->query($sql);
+                                            $i = 0;
+                                            if($result->num_rows > 0){
+                                                while($row = $result->fetch_assoc()){
+                                                    if($i == 0){
+                                        ?>
+                                                        <div class="row mb-3">
+                                                            
+                                                            <div class="col-sm-5">
+                                                                <input type="number" name="km[]" class="form-control" value="<?php echo $row['km'] ?>" required>
+                                                            </div>
+                                                            <div class="col-sm-5">
+                                                                <input type="number" name="price[]" class="form-control" value="<?php echo $row['price'] ?>" required>
+                                                            </div>
+                                                            
+                                                            <div class="col-sm-1">
+                                                                <button type="button" name="add" id="add" class="btn btn-primary">+</button>
+                                                            </div>
+                                                        </div>
+                                        <?php
+                                                    } else{
+                                        ?>
+                                                        <div class="row mb-3" id="duplicate<?php echo $i ?>">
+                                                            
+                                                            <div class="col-sm-5">
+                                                                <input type="number" name="km[]" class="form-control" value="<?php echo $row['km'] ?>" required>
+                                                            </div>
+                                                            <div class="col-sm-5">
+                                                                <input type="number" name="price[]" class="form-control" value="<?php echo $row['price'] ?>" required>
+                                                            </div>
+                                                         
+                                                            <div class="col-sm-1">
+                                                                <button type="button" name="remove" class="btn btn-danger btn_remove" id="<?php echo $i ?>">X</button>
+                                                            </div>
+                                                        </div>
+                                        <?php
+                                                    }
+                                                    $i++;
+                                                }
+                                            } else{
+                                        ?>
+                                                <div class="row mb-3">
+                                                    <div class="col-sm-5">
+                                                        <input type="number" name="km[]" class="form-control" placeholder = "km" required>
+                                                    </div>
+                                                    <div class="col-sm-5">
+                                                        <input type="number" name="price[]" class="form-control" placeholder = "price" required>
+                                                    </div>
+                                                    <div class="col-sm-1">
+                                                        <button type="button" name="add" id="add" class="btn btn-primary">+</button>
+                                                    </div>
+                                                </div>
+                                        <?php
+                                            }
+                                        ?>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <input type="submit" value="Save" name="kmpricesubmit" class="btn btn-primary float-right">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <?php
@@ -190,6 +298,25 @@
                 percent.value = 0
             }
         }
+    </script>
+
+<script>
+        $(document).ready(function() {
+            App.init();
+        });
+        var i = <?php echo $i ?>;
+
+        $('#add').click(function(){
+            i++;
+            $('#duplicate').append(
+                '<div class="row mb-3" id="duplicate'+i+'"><div class="col-sm-5"><input type="number" name="km[]" class="form-control" required></div><div class="col-sm-5"><input type="number" name="price[]" class="form-control" required></div><div class="col-sm-1"><button type="button" name="remove" class="btn btn-danger btn_remove" id="'+i+'">X</button></div></div>'
+            );
+        });
+
+        $(document).on('click', '.btn_remove', function(){
+            var button_id = $(this).attr("id");
+            $('#duplicate'+button_id+'').remove();
+        });
     </script>
 </body>
 </html>

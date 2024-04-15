@@ -84,7 +84,7 @@
                         $order_id = 0;
                     }
 
-                    $order_string = 'SL'.date('dm').$order_id;
+                    $order_string = 'SL'.date('ymd').$order_id;
 
                     $sql2 = "SELECT * FROM orders WHERE delivery_partner_id='$ambulance_id'";
                     $result2 = $conn->query($sql2);
@@ -100,7 +100,7 @@
                     if($conn->query($sql) === TRUE){
                         $order_id = $conn->insert_id;
 
-                        $res = sendNotificationDelivery($ambulance_id, $driverTitle, "New Booking!", '', $order_id, '1', '');
+                        // $res = sendNotificationDelivery($ambulance_id, $driverTitle, "New Booking!", '', $order_id, '1', '');
                         $res = actionSendNotificationDelivery($ambulance_id, $driverTitle, "New Booking!", '', $order_id, '1', '');
                         $res = sendNotificationUser($user_id, $title, 'Your ambulance request has been sent successfully!', '', $order_id, '1');
 

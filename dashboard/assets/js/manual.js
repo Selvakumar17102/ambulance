@@ -887,6 +887,38 @@ function branchStatus(id){
         }
     });
 }
+function deliveryPartnerCodStatus(id){
+    $.ajax({
+        type: "POST",
+        url: "ajax/deliveryPartnerCodStatus.php",
+        data:{'delivery_partner_id':id},
+        success: function(data){
+            if(data == 'true'){
+                Snackbar.show({
+                    text: 'Delivery Partner COD status updated',
+                    pos: 'bottom-right',
+                    actionText: 'Success',
+                    actionTextColor: '#A1D433',
+                    duration: 5000
+                });
+                return true
+            } else{
+                Snackbar.show({
+                    text: 'Status updation failed',
+                    pos: 'bottom-right',
+                    actionText: 'Error',
+                    actionTextColor: '#8dbf42',
+                    duration: 5000
+                });
+                if(document.getElementById('C' + id).checked){
+                    document.getElementById('C' + id).checked = false
+                } else{
+                    document.getElementById('C' + id).checked = true
+                }
+            }
+        }
+    });
+}
 function deliveryPartnerStatus(id){
     $.ajax({
         type: "POST",

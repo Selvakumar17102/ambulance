@@ -7,12 +7,13 @@
 	$requestReason = 'active';
 
     if(isset($_POST['add'])){
+        $bloodtype = $_POST['bloodtype'];
         $reason = $_POST['requestReason'];
         if($reason){
             $reason_sql = "SELECT * FROM request_reason WHERE reason = '$reason'";
             $reason_result = $conn->query($reason_sql);
             if($reason_result->num_rows == NULL){
-                $insertSql = "INSERT INTO request_reason (reason) VALUES ('$reason')";
+                $insertSql = "INSERT INTO request_reason (type,reason) VALUES ('$bloodtype','$reason')";
                 if($conn->query($insertSql) === TRUE){
                     header('Location: request-reason.php?msg=Reason Added !');
                 }
@@ -27,13 +28,14 @@
 
     if(isset($_POST['edit'])){
         $reason_id = $_POST['reason_id'];
+        $editbloodtype = $_POST['editbloodtype'];
         $editReasonName = $_POST['editReasonName'];
 
         if($editReasonName){
             $reason_sql = "SELECT * FROM request_reason WHERE reason = '$editReasonName' AND reason_id != '$reason_id'";
             $reason_result = $conn->query($reason_sql);
             if($reason_result->num_rows == NULL){
-                $updatesql = "UPDATE request_reason SET reason = '$editReasonName' WHERE reason_id = '$reason_id'";
+                $updatesql = "UPDATE request_reason SET reason = '$editReasonName',type='$editbloodtype' WHERE reason_id = '$reason_id'";
                 if($conn->query($updatesql)===TRUE){
                     header('Location: request-reason.php?msg=Reason updated !');
                 }
@@ -118,6 +120,16 @@
                                                         <div class="modal-body">
                                                             <div class="row">
                                                                 <div class="col-sm-12">
+                                                                    <label>Blood Type</label>
+                                                                    <select name="bloodtype" id="bloodtype" class="form-control">
+                                                                        <option value="">--Select Type--</option>
+                                                                        <option value="1">Blood</option>
+                                                                        <option value="2">Platelets</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-sm-12">
                                                                     <label>Reason</label>
 																	<input type="text" name="requestReason" id="requestReason" class="form-control" placeholder="Request Reason" required>
                                                                 </div>
@@ -140,6 +152,7 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-center">#</th>
+                                                <th class="text-center">Type</th>
                                                 <th class="text-center">Reasons</th>
                                                 <th class="text-center">Action</th>
                                             </tr>
@@ -155,6 +168,13 @@
                                             ?>
                                                 <tr>
                                                     <td class="text-center"><?php echo ++$count ?></td>
+                                                    <td class="text-center"><b><?php
+                                                    if($row['type'] == 1){
+                                                        echo "Blood";
+                                                    }else{
+                                                        echo "Platelets";
+                                                    }
+                                                     ?></b></td>
                                                     <td class="text-center"><b><?php echo $row['reason'] ?></b></td>
                                                     <td class="text-center">
                                                         <ul class="table-controls">
@@ -175,10 +195,19 @@
                                                                                 <div class="modal-body">
                                                                                     <div class="row">
                                                                                         <div class="col-sm-12">
+                                                                                            <label>Blood Type</label>
+                                                                                            <select name="editbloodtype" id="editbloodtype" class="form-control">
+                                                                                                <option value="">--Select Type--</option>
+                                                                                                <option value="1" <?php if($row['type'] == 1){ echo "selected"; }?>>Blood</option>
+                                                                                                <option value="2" <?php if($row['type'] == 2){ echo "selected"; }?>>Platelets</option>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="row">
+                                                                                        <div class="col-sm-12">
                                                                                             <label>Reason</label>
                                                                                             <input type="text" name="editReasonName" id="editReasonName<?php echo $count ?>" class="form-control" placeholder="Reason Name" value="<?php echo $row['reason'] ?>">
                                                                                         </div>
-                                                                                        
                                                                                     </div>
                                                                                     <input type="hidden" name="reason_id" value="<?php echo $reason_id ?>">
                                                                                 </div>

@@ -69,11 +69,11 @@
 
                         $driverTitle = "Hi ".$delivery_partner_name;
 
-                        // $travel_distance = '0 Km';
+                        $travel_distance = '';
                         // if($service_type == 2){
-                        //     $km = round(getDistance($pickup_latitude,$pickup_longitude,$drop_latitude,$drop_longitude));
+                            $km = round(getDistance($pickup_latitude,$pickup_longitude,$drop_latitude,$drop_longitude));
 
-                        //     $travel_distance = $km.' Km';
+                            $travel_distance = $km.' Km';
                         // }
 
                         $sql2 = "SELECT * FROM orders WHERE delivery_partner_id = '$ambulance_id'";
@@ -107,7 +107,7 @@
                         $order_id = 0;
                     }
 
-                    $order_string = 'SL'.date('dm').$order_id;
+                    $order_string = 'SL'.date('ymd').$order_id;
 
                     if($msg == "Without Drop Location" || $msg == "With Drop Location"){
                         $sql = "INSERT INTO orders (order_string,trip_string,user_id,login_id,booking_date,booking_time,order_status,total_amount,service_type,pickup_address,pickup_latitude,pickup_longitude,drop_address,drop_latitude,drop_longitude,delivery_partner_id,travel_distance,amount_for_client,pickup_otp,payment_type) VALUES ('$order_string','$tripString','$user_id','$branch_id','$booking_date','$booking_time','$order_status','$total_amount','$service_type','$pickup_address','$pickup_latitude','$pickup_longitude','$drop_address','$drop_latitude','$drop_longitude','$ambulance_id','$travel_distance','$amount_for_client','$pickup_otp','$payment_type')";
@@ -117,7 +117,7 @@
                             $res = sendNotificationUser($user_id, $title, 'Your ambulance request has been sent successfully!', '', $order_id, '1');
                             
                             if($msg == "With Drop Location"){
-                                $res = sendNotificationDelivery($ambulance_id, $driverTitle, "New Booking!", '', $order_id, '1', '');
+                                // $res = sendNotificationDelivery($ambulance_id, $driverTitle, "New Booking!", '', $order_id, '1', '');
                                 $res = actionSendNotificationDelivery($ambulance_id, $driverTitle, "New Booking!", '', $order_id, '1', '');
                             }
                             elseif($msg == "Without Drop Location"){
@@ -149,7 +149,7 @@
                                     $delivery_partner_name = $partner['delivery_partner_name'];
                                     $driverTitle = "Hi ".$delivery_partner_name;
 
-                                    $res = sendNotificationDelivery($ambulance_id, $driverTitle, "New Booking!", '', $order_id, '1', '');
+                                    // $res = sendNotificationDelivery($ambulance_id, $driverTitle, "New Booking!", '', $order_id, '1', '');
                                     $res = actionSendNotificationDelivery($ambulance_id, $driverTitle, "New Booking!", '', $order_id, '1', '');
                                 }
                             }

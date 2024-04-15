@@ -149,6 +149,7 @@
                                                 <th class="text-center">Payment To Driver (₹)</th> -->
                                                 <th class="text-center">Online Status</th>
                                                 <th class="text-center">Status</th>
+                                                <th class="text-center">COD Status</th>
                                                 <th class="text-center">Action</th>
                                             </tr>
                                         </thead>
@@ -184,9 +185,12 @@
                                                     } else{
                                                         $onineStatus = '<span class="badge outline-badge-danger">Offline</span>';
                                                     }
-                                                    $status = $delivery_partner_online_status = '';
+                                                    $status = $delivery_partner_online_status = $codstatus = '';
                                                     if($row['delivery_partner_status'] == 1){
                                                         $status = 'checked';
+                                                    }
+                                                    if($row['delivery_partner_cod_status'] == 1){
+                                                        $codstatus = 'checked';
                                                     }
                                                     if($row['delivery_partner_online_status'] == 1){
                                                         $delivery_partner_online_status = 'checked';
@@ -253,6 +257,12 @@
                                                         <td class="text-center">
                                                             <label class="switch s-icons s-outline s-outline-success mr-2" style="margin-bottom: 0px !important">
                                                                 <input type="checkbox" id="S<?php echo $delivery_partner_id ?>" <?php echo $status ?> onclick="return deliveryPartnerStatus(<?php echo $delivery_partner_id ?>)">
+                                                                <span class="slider round"></span>
+                                                            </label>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <label class="switch s-icons s-outline s-outline-success mr-2" style="margin-bottom: 0px !important">
+                                                                <input type="checkbox" id="C<?php echo $delivery_partner_id ?>" <?php echo $codstatus ?> onclick="return deliveryPartnerCodStatus(<?php echo $delivery_partner_id ?>)">
                                                                 <span class="slider round"></span>
                                                             </label>
                                                         </td>

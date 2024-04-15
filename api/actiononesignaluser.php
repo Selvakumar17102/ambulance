@@ -29,7 +29,7 @@
             "ios_attachments" => $ios_img,
             'priority' => 10,
             "data" => (object)array("order_id"=> $order_id,"order_status"=>"$order_status","type"=>0,"category_id"=>0),
-            "buttons" => array(["id"=> "accept_button", "text"=> "Accept", "icon"=> ""],["id"=> "reject_button", "text"=> "Reject", "icon"=> ""]),
+            "buttons" => array(["id"=> "accept_button", "text"=> "Accept", "icon"=> "ic_menu_accept"],["id"=> "reject_button", "text"=> "Reject", "icon"=> "ic_menu_reject"]),
             "notification" => (object)array("order_id"=> $order_id,"order_status"=>"$order_status","type"=>0,"category_id"=>0),
             "android_channel_id" => "f460dc8d-88a2-49ba-8a1f-4f691e6b96f7"
         );
