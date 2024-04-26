@@ -51,6 +51,7 @@
                     $output_array['GTS']['bleeding_status'] = $donorrow['bleeding_status'];
                     $output_array['GTS']['cardiac_status'] = $donorrow['cardiac_status'];
                     $output_array['GTS']['hiv_status'] = $donorrow['hiv_status'];
+                    $output_array['GTS']['surgery_status'] = $donorrow['surgery_status'];
                     $output_array['status'] = true;
                 }else{
                     http_response_code(404);

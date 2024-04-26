@@ -26,6 +26,7 @@
     $row = $result->fetch_assoc();
 
     $output_array['GTS']['app_version'] = $row['app_version_name'];
+    $output_array['GTS']['news_text'] = $row['news_text'];
 
     $output_array['status'] = true;
 

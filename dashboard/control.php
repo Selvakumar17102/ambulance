@@ -8,11 +8,12 @@
     if(isset($_POST['add'])){
         $percentage_to_client = $_POST['percentage_to_client'];
         $customer_care_no = $_POST['customer_care_no'];
+        $news_text = $_POST['news_text'];
         // $amount_to_client = $_POST['amount_to_client'];
         $service_not_available_content = $_POST['service_not_available_content'];
         $upi_qr_code = $_FILES['upi_qr_code']['name'];
 
-        $sql = "UPDATE app_control SET percentage_to_client='$percentage_to_client',service_not_available_content='$service_not_available_content', customer_care_no = '$customer_care_no' WHERE app_control_id = '1'";
+        $sql = "UPDATE app_control SET news_text='$news_text',percentage_to_client='$percentage_to_client',service_not_available_content='$service_not_available_content', customer_care_no = '$customer_care_no' WHERE app_control_id = '1'";
         if($conn->query($sql) === TRUE){
             
             $sql = "SELECT * FROM app_control WHERE app_control_id='1'";
@@ -161,6 +162,10 @@
                                         <div class="col-sm-6 mt-2">
                                             <label>Customer Care Number</label>
                                             <input type="text" name="customer_care_no" id="customer_care_no" class="form-control" placeholder="Customer Care Number" value="<?php echo $row['customer_care_no'] ?>">
+                                        </div>
+                                        <div class="col-sm-12 mt-2">
+                                            <label>News Text</label>
+                                            <textarea name="news_text" id="news_text" class="form-control" placeholder="news text" cols="10" rows="2"><?php echo $row['news_text'] ?></textarea>
                                         </div>
                                     </div>
                                     <div class="row mt-2">

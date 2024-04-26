@@ -27,12 +27,13 @@
                 $cardiac_status = $data->cardiac_status;
                 $hiv_status = $data->hiv_status;
                 $last_donation_date = $data->last_donation_date;
+                $surgery_status = $data->surgery_status;
                
 
                 $sql = "SELECT * FROM user WHERE user_id='$user_id'";
                 $result = $conn->query($sql);
                 if($result->num_rows > 0){
-                    $sql = "UPDATE blood_donation SET blood_donor_age='$blood_donor_age',donor_height='$donor_height',donor_weight='$donor_weight',donor_address='$donor_address',donor_latitude='$donor_latitude',donor_longitude='$donor_longitude',bleeding_status='$bleeding_status',cardiac_status='$cardiac_status',hiv_status='$hiv_status',any_diseases_status='$any_diseases_status',any_allergies_status='$any_allergies_status',take_any_medication='$take_any_medication',last_time_donated_date='$last_donation_date' WHERE user_id='$user_id'";
+                    $sql = "UPDATE blood_donation SET surgery_status='$surgery_status', blood_donor_age='$blood_donor_age',donor_height='$donor_height',donor_weight='$donor_weight',donor_address='$donor_address',donor_latitude='$donor_latitude',donor_longitude='$donor_longitude',bleeding_status='$bleeding_status',cardiac_status='$cardiac_status',hiv_status='$hiv_status',any_diseases_status='$any_diseases_status',any_allergies_status='$any_allergies_status',take_any_medication='$take_any_medication',last_time_donated_date='$last_donation_date' WHERE user_id='$user_id'";
                     if($conn->query($sql) === TRUE){
                         http_response_code(200);
                         $output_array['status'] = true;
