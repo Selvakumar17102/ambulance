@@ -30,6 +30,8 @@
                 $branch_id = $data->login_id;
                 $order_status = 1;
 
+                
+
                 $pickup_otp = 0;
                 if($service_type == 2){
                     $pickup_otp = mt_rand(1000,9999);
@@ -57,6 +59,7 @@
                     $row = $result->fetch_assoc();
 
                     $user_name = $row['user_name'];
+                    
 
                     $title = 'Hi '.$user_name;
 
@@ -74,6 +77,18 @@
                             $km = round(getDistance($pickup_latitude,$pickup_longitude,$drop_latitude,$drop_longitude));
 
                             $travel_distance = $km.' Km';
+
+                            $emrSql = "SELECT * FROM `emergency_ambulace_price`";
+                            $emrResult = $conn->query($emrSql);
+                            while($emrRow = $emrResult->fetch_assoc()){
+                                $emrkm = $emrRow['km'];
+                                if($travel_distance < $emrkm){
+                                    $total_amount = $emrRow['price'];
+                                }else{
+                                    $total_amount = $emrRow['price'];
+                                }
+                            }
+                            
                         // }
 
                         $sql2 = "SELECT * FROM orders WHERE delivery_partner_id = '$ambulance_id'";
@@ -157,6 +172,7 @@
                             $output_array['status'] = true;
                             $output_array['order_id'] = (int)$order_id;
                             $output_array['order_string'] = $order_string;
+                            $output_array['total_amount'] = $total_amount;
                         } else {
                             http_response_code(500);
                             $output_array['status'] = false;

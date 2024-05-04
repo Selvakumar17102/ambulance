@@ -2,7 +2,7 @@
 
 function findNearbyHospitals($latitude, $longitude, $radius = 1000) {
 
-    $apiKey = 'AIzaSyBqB0yyrZ8XHhJPWzPaKTKLMTj0brw6ogg';
+    $apiKey = 'AIzaSyAI62cBZ4Y7BhJRRlUfRVU7G2eQ4y4bNQA';
     
     $url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?';
     
