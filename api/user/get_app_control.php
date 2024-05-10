@@ -28,6 +28,16 @@
 
     $output_array['GTS']['app_version'] = $row['app_version_name'];
 
+
+    $output_array['GTS']['ambulance_privacy_policy'] = "https://salvo.gtechlab.in/ambulance-privacy-policy/";
+    $output_array['GTS']['ambulance_terms_conditions'] = "https://salvo.gtechlab.in/ambulance-terms-conditions/";
+    $output_array['GTS']['blood_donation_facts'] = "https://salvo.gtechlab.in/blood-donation-facts/";
+    $output_array['GTS']['blood_privacy_policy'] = "https://salvo.gtechlab.in/blood-privacy-policy/";
+    $output_array['GTS']['blood_terms_conditions'] = "https://salvo.gtechlab.in/blood-terms-conditions/";
+    $output_array['GTS']['driver_privacy_policy'] = "https://salvo.gtechlab.in/driver-privacy-policy/";
+    $output_array['GTS']['driver_terms_conditions'] = "https://salvo.gtechlab.in/driver-privacy-policy/";
+    
+
     $output_array['status'] = true;
 
     echo json_encode($output_array);
