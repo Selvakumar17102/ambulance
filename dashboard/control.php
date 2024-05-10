@@ -62,6 +62,22 @@
             header("Location: control.php?msg=price updated!");
         }
     }
+
+    if(isset($_POST['newssubmit'])){
+
+        $sql = "TRUNCATE TABLE news";
+        
+        if($conn->query($sql) === TRUE){
+            for($i=0;$i<count($_POST['news']);$i++){
+                
+                $start = $_POST['news'][$i];
+                
+                $sql = "INSERT INTO news (news_text) VALUES ('$start')";
+                $conn->query($sql);
+            }
+            header("Location: control.php?msg=News updated!");
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -163,10 +179,10 @@
                                             <label>Customer Care Number</label>
                                             <input type="text" name="customer_care_no" id="customer_care_no" class="form-control" placeholder="Customer Care Number" value="<?php echo $row['customer_care_no'] ?>">
                                         </div>
-                                        <div class="col-sm-12 mt-2">
+                                        <!-- <div class="col-sm-12 mt-2">
                                             <label>News Text</label>
                                             <textarea name="news_text" id="news_text" class="form-control" placeholder="news text" cols="10" rows="2"><?php echo $row['news_text'] ?></textarea>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="row mt-2">
                                         <div class="col-sm-12">
@@ -177,12 +193,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-12">
+                    <div class="col-sm-6">
                         <div class="statbox widget box box-shadow">
                             <div class="widget-header">
                                 <div class="row">
                                     <div class="col-sm-10">
-                                        <h4>Salvo ambulance km based price</h4>
+                                        <h4>KM based price</h4>
                                     </div>
                                 </div>
                             </div>
@@ -265,6 +281,81 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-sm-6">
+                        <div class="statbox widget box box-shadow">
+                            <div class="widget-header">
+                                <div class="row">
+                                    <div class="col-sm-10">
+                                        <h4>News Text</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="widget-content widget-content-area">
+                                <div class="row mb-3">
+                                    <div class="col-sm-11">
+                                        <p class="text-center">News</p>
+                                    </div>                                  
+                                    <div class="col-sm-1"></div>
+                                </div>
+                                <form method="post" enctype="multipart/form-data">
+                                    <div class="form-group m-b30" id="duplicatenews">
+                                        <?php
+                                            $sql = "SELECT * FROM news";
+                                            $result = $conn->query($sql);
+                                            $j = 0;
+                                            if($result->num_rows > 0){
+                                                while($row = $result->fetch_assoc()){
+                                                    if($j == 0){
+                                        ?>
+                                                        <div class="row mb-3">
+                                                            <div class="col-sm-10">
+                                                                <textarea name="news[]" class="form-control" cols="10" rows="1" required><?php echo $row['news_text'] ?></textarea>
+                                                            </div>
+                                                            <div class="col-sm-1">
+                                                                <button type="button" name="add" id="add1" class="btn btn-primary">+</button>
+                                                            </div>
+                                                        </div>
+                                        <?php
+                                                    } else{
+                                        ?>
+                                                        <div class="row mb-3" id="duplicatenews<?php echo $j ?>">
+                                                            
+                                                            <div class="col-sm-10">
+                                                                <textarea name="news[]" class="form-control" cols="10" rows="1" required><?php echo $row['news_text'] ?></textarea>
+                                                            </div>
+                                                         
+                                                            <div class="col-sm-1">
+                                                                <button type="button" name="remove" class="btn btn-danger btn_remove1" id="<?php echo $j ?>">X</button>
+                                                            </div>
+                                                        </div>
+                                        <?php
+                                                    }
+                                                    $j++;
+                                                }
+                                            } else{
+                                        ?>
+                                                <div class="row mb-3">
+                                                    <div class="col-sm-10">
+                                                        <textarea name="news[]" class="form-control" placeholder = "News Text" cols="10" rows="1" required></textarea>
+                                                    </div>
+                                                    <div class="col-sm-1">
+                                                        <button type="button" name="add" id="add1" class="btn btn-primary">+</button>
+                                                    </div>
+                                                </div>
+                                        <?php
+                                            }
+                                        ?>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <input type="submit" value="Save" name="newssubmit" class="btn btn-primary float-right">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <?php
@@ -321,6 +412,25 @@
         $(document).on('click', '.btn_remove', function(){
             var button_id = $(this).attr("id");
             $('#duplicate'+button_id+'').remove();
+        });
+    </script>
+
+<script>
+        $(document).ready(function() {
+            App.init();
+        });
+        var j = <?php echo $j ?>;
+
+        $('#add1').click(function(){
+            j++;
+            $('#duplicatenews').append(
+                '<div class="row mb-3" id="duplicatenews'+j+'"><div class="col-sm-10"><textarea name="news[]" class="form-control" placeholder = "News Text" cols="10" rows="1" required></textarea></div><div class="col-sm-1"><button type="button" name="remove" class="btn btn-danger btn_remove1" id="'+j+'">X</button></div></div>'
+            );
+        });
+
+        $(document).on('click', '.btn_remove1', function(){
+            var button_id = $(this).attr("id");
+            $('#duplicatenews'+button_id+'').remove();
         });
     </script>
 </body>
