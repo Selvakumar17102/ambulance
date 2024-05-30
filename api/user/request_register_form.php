@@ -38,6 +38,66 @@
 					$required_date = $data->required_date;
 					$currentTime = date('H:i:s');
 
+					switch ($blood_group) {
+						case '1':
+							$bloodname = "A+";
+							break;
+						case '2':
+							$bloodname = "O+";
+							break;
+						case '3':
+							$bloodname = "B+";
+							break;
+						case '4':
+							$bloodname = "AB+";
+							break;
+						case '5':
+							$bloodname = "AB-";
+							break;
+						case '6':
+							$bloodname = "O-";
+							break;
+						case '7':
+							$bloodname = "A-";
+							break;
+						case '8':
+							$bloodname = "B-";
+							break;
+						case '9':
+							$bloodname = "A1+";
+							break;
+						case '10':
+							$bloodname = "A1-";
+							break;
+						case '11':
+							$bloodname = "A2+";
+							break;
+						case '12':
+							$bloodname = "A2-";
+							break;
+						case '13':
+							$bloodname = "A1B+";
+							break;
+						case '14':
+							$bloodname = "A1B-";
+							break;
+						case '15':
+							$bloodname = "A2B+";
+							break;
+						case '16':
+							$bloodname = "A2B-";
+							break;
+						case '17':
+							$bloodname = "Bombay Blood Group";
+							break;
+						case '18':
+							$bloodname = "INRA";
+							break;
+						default:
+							$bloodname = "Don`t Know";
+							break;
+					}
+
                     $sql = "INSERT INTO blood_request (user_id,patient_name,age,phone_no,alter_phone_no,blood_group,blood_type,request_date,unit,hospital_location,latitude,longitude,emergency_status,dummy_otp,required_date,request_reason,request_time)VALUES ('$user_id','$patient_name','$age','$phone_no','$alter_phone_no','$blood_group','$blood_type','$request_date','$unit','$address','$latitude','$longitude','$emergency_status','$dummy_otp','$required_date','$request_reason_id','$currentTime')";
                     if($conn->query($sql) === TRUE){
 						$request_id = $conn->insert_id;
@@ -48,8 +108,8 @@
 							while($blood_donation_row = $blood_donation_result->fetch_assoc()){
 								$donor_id = $blood_donation_row['user_id'];
                     			$title = 'Hi '.$blood_donation_row['blood_donor_name'];
-								$res = sendNotificationUser($donor_id, $title, "Urgent Need .'$blood_group'. Blood !", '', $request_id, '1');
-								$res = actionsendNotificationUser($donor_id, $title, "Urgent Need .'$blood_group'. Blood !", '', $request_id, '1');
+								$res = sendNotificationUser($donor_id, $title, "Urgent Need .'$bloodname'. Blood !", '', $request_id, '1');
+								$res = actionsendNotificationUser($donor_id, $title, "Urgent Need .'$bloodname'. Blood !", '', $request_id, '1');
 							}
 						}
 						

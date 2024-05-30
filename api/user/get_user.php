@@ -34,10 +34,70 @@
                 } else{
                     $output_array['GTS']['profile_image'] = "";
                 }
+
+                switch ($row['blood_group']) {
+                    case '1':
+                        $bloodname = "A+";
+                        break;
+                    case '2':
+                        $bloodname = "O+";
+                        break;
+                    case '3':
+                        $bloodname = "B+";
+                        break;
+                    case '4':
+                        $bloodname = "AB+";
+                        break;
+                    case '5':
+                        $bloodname = "AB-";
+                        break;
+                    case '6':
+                        $bloodname = "O-";
+                        break;
+                    case '7':
+                        $bloodname = "A-";
+                        break;
+                    case '8':
+                        $bloodname = "B-";
+                        break;
+                    case '9':
+                        $bloodname = "A1+";
+                        break;
+                    case '10':
+                        $bloodname = "A1-";
+                        break;
+                    case '11':
+                        $bloodname = "A2+";
+                        break;
+                    case '12':
+                        $bloodname = "A2-";
+                        break;
+                    case '13':
+                        $bloodname = "A1B+";
+                        break;
+                    case '14':
+                        $bloodname = "A1B-";
+                        break;
+                    case '15':
+                        $bloodname = "A2B+";
+                        break;
+                    case '16':
+                        $bloodname = "A2B-";
+                        break;
+                    case '17':
+                        $bloodname = "Bombay Blood Group";
+                        break;
+                    case '18':
+                        $bloodname = "INRA";
+                        break;
+                    default:
+                        $bloodname = "Don`t Know";
+                        break;
+                }
                 $output_array['GTS']['mobile_number'] = $row['user_phone_number'];
                 $output_array['GTS']['user_alternate_phone_number'] = $row['user_alternate_phone_number'];
                 $output_array['GTS']['email_id'] = $row['user_email'];
-                $output_array['GTS']['blood_group'] = $row['blood_group'];
+                $output_array['GTS']['blood_group'] = $bloodname;
                 $output_array['GTS']['bp_level'] = (int)$row['bp_level'];
                 $output_array['GTS']['sugar'] = (int)$row['sugar_level'];
                 $output_array['GTS']['thyroid'] = (int)$row['thyroid'];
