@@ -97,7 +97,7 @@
             } else{
                 header($notFound);
                 $output_array['status'] = false;
-                $output_array['message'] = 'Order not found';
+                $output_array['message'] = 'Booking not found';
             }
         } else{
             header($inValid);

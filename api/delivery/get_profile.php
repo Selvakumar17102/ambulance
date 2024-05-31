@@ -58,6 +58,11 @@
                 $output_array['GTS']['vehicle_type_name'] = $catTable['category_name'];
                 $output_array['GTS']['online_status'] = (int)$row['delivery_partner_online_status'];
                 $output_array['GTS']['delivery_partner_status'] = (int)$row['delivery_partner_status'];
+                
+                $output_array['GTS']['accoount_name'] = (int)$row['accoount_name'];
+                $output_array['GTS']['account_number'] = (int)$row['account_number'];
+                $output_array['GTS']['bank_name'] = (int)$row['bank_name'];
+                $output_array['GTS']['ifsc_code'] = (int)$row['ifsc_code'];
 
                 $sql = "SELECT * FROM driver_image_file WHERE driver_id='$user_id'";
                 $result = $conn->query($sql);

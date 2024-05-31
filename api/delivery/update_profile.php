@@ -35,6 +35,12 @@
                 $license_number = $_POST["license_number"];
                 $aadhaar_number = $_POST["aadhaar_number"];
                 $hospital_name = $_POST["hospital_name"];
+
+                $accoount_name = $_POST["accoount_name"];
+                $account_number = $_POST["account_number"];
+                $bank_name = $_POST["bank_name"];
+                $ifsc_code = $_POST["ifsc_code"];
+
                 $delivery_partner_date_of_birth = date('Y-m-d',strtotime($_POST["date_of_birth"]));
                 $delivery_partner_address = mysqli_real_escape_string($conn, $_POST["address"]);
                 $license = $_FILES['license'];
@@ -46,7 +52,7 @@
                 $sql = "SELECT * FROM delivery_partner WHERE delivery_partner_id='$user_id'";
                 $result = $conn->query($sql);
                 if($result->num_rows){
-                    // $sql = "UPDATE delivery_partner SET delivery_partner_branch_id='$branch_id',delivery_partner_name='$name',delivery_partner_date_of_birth='$delivery_partner_date_of_birth',delivery_partner_gender='$gender',local_charge='$local_charge',local_min_distance='$local_min_distance',local_extra_charge_per_km='$local_extra_charge_per_km',long_charge='$long_charge',long_min_distance='$long_min_distance',long_max_distance='$long_max_distance',long_extra_charge_per_km='$long_extra_charge_per_km',vehicle_type='$vehicle_type',delivery_partner_vehicle_name='$vehicle_name',delivery_partner_vehicle_number='$vehicle_number',license_number='$license_number',delivery_partner_address='$delivery_partner_address',delivery_partner_alternate_mobile='$delivery_partner_alternate_mobile',delivery_partner_blood_group='$delivery_partner_blood_group',delivery_partner_email='$delivery_partner_email',aadhaar_number='$aadhaar_number',hospital_name='$hospital_name' WHERE delivery_partner_id='$user_id'";
+                    // $sql = "UPDATE delivery_partner SET delivery_partner_branch_id='$branch_id',delivery_partner_name='$name',delivery_partner_date_of_birth='$delivery_partner_date_of_birth',delivery_partner_gender='$gender',local_charge='$local_charge',local_min_distance='$local_min_distance',local_extra_charge_per_km='$local_extra_charge_per_km',long_charge='$long_charge',long_min_distance='$long_min_distance',long_max_distance='$long_max_distance',long_extra_charge_per_km='$long_extra_charge_per_km',vehicle_type='$vehicle_type',delivery_partner_vehicle_name='$vehicle_name',delivery_partner_vehicle_number='$vehicle_number',license_number='$license_number',delivery_partner_address='$delivery_partner_address',delivery_partner_alternate_mobile='$delivery_partner_alternate_mobile',delivery_partner_blood_group='$delivery_partner_blood_group',delivery_partner_email='$delivery_partner_email',aadhaar_number='$aadhaar_number',hospital_name='$hospital_name',accoount_name='$accoount_name',account_number='$account_number',bank_name='$bank_name',ifsc_code='$ifsc_code' WHERE delivery_partner_id='$user_id'";
                     $sql = "UPDATE delivery_partner SET delivery_partner_name='$name',local_charge='$local_charge',local_min_distance='$local_min_distance',local_extra_charge_per_km='$local_extra_charge_per_km',long_charge='$long_charge',long_min_distance='$long_min_distance',long_max_distance='$long_max_distance',long_extra_charge_per_km='$long_extra_charge_per_km',delivery_partner_address='$delivery_partner_address',delivery_partner_alternate_mobile='$delivery_partner_alternate_mobile' WHERE delivery_partner_id='$user_id'";
                     if($conn->query($sql) === TRUE){
     

@@ -55,7 +55,7 @@
                 } else{
                     http_response_code(404);
                     $output_array['status'] = false;
-                    $output_array['message'] = 'Order not found';
+                    $output_array['message'] = 'Booking not found';
                 }
             } else{
                 http_response_code(404);

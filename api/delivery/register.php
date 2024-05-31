@@ -38,6 +38,11 @@
         $date = date('Y_m_d_h_i_s');
         $first_aid_status = $_POST["first_aid_status"];
 
+        $accoount_name = $_POST["accoount_name"];
+        $account_number = $_POST["account_number"];
+        $bank_name = $_POST["bank_name"];
+        $ifsc_code = $_POST["ifsc_code"];
+
         $sql = "SELECT * FROM branch WHERE login_id='$branch_id'";
         $result = $conn->query($sql);
         if($result->num_rows > 0){
@@ -51,7 +56,7 @@
                 $NewPass = $passwordResponce->password;
                 $cipher = $passwordResponce->cipher;
 
-                $sql = "INSERT INTO delivery_partner (delivery_partner_branch_id,delivery_partner_name,delivery_partner_date_of_birth,delivery_partner_phone,delivery_partner_gender,delivery_partner_password,delivery_partner_cipher,delivery_partner_fcm,delivery_partner_registration_date,local_charge,local_min_distance,local_extra_charge_per_km,long_charge,long_min_distance,long_max_distance,long_extra_charge_per_km,vehicle_type,delivery_partner_vehicle_name,delivery_partner_vehicle_number,license_number,delivery_partner_address,delivery_partner_alternate_mobile,delivery_partner_blood_group,delivery_partner_email,aadhaar_number,request_status,hospital_name,emergency,first_aid_status) VALUES ('$branch_id','$name','$delivery_partner_date_of_birth','$phone','$gender','$NewPass','$cipher','$fcm','$registrationDate','$local_charge','$local_min_distance','$local_extra_charge_per_km','$long_charge','$long_min_distance','$long_max_distance','$long_extra_charge_per_km','$vehicle_type','$vehicle_name','$vehicle_number','$license_number','$delivery_partner_address','$delivery_partner_alternate_mobile','$delivery_partner_blood_group','$delivery_partner_email','$aadhaar_number',1,'$hospital_name','$emergency','$first_aid_status')";
+                $sql = "INSERT INTO delivery_partner (delivery_partner_branch_id,delivery_partner_name,delivery_partner_date_of_birth,delivery_partner_phone,delivery_partner_gender,delivery_partner_password,delivery_partner_cipher,delivery_partner_fcm,delivery_partner_registration_date,local_charge,local_min_distance,local_extra_charge_per_km,long_charge,long_min_distance,long_max_distance,long_extra_charge_per_km,vehicle_type,delivery_partner_vehicle_name,delivery_partner_vehicle_number,license_number,delivery_partner_address,delivery_partner_alternate_mobile,delivery_partner_blood_group,delivery_partner_email,aadhaar_number,request_status,hospital_name,emergency,first_aid_status,accoount_name,account_number,bank_name,ifsc_code) VALUES ('$branch_id','$name','$delivery_partner_date_of_birth','$phone','$gender','$NewPass','$cipher','$fcm','$registrationDate','$local_charge','$local_min_distance','$local_extra_charge_per_km','$long_charge','$long_min_distance','$long_max_distance','$long_extra_charge_per_km','$vehicle_type','$vehicle_name','$vehicle_number','$license_number','$delivery_partner_address','$delivery_partner_alternate_mobile','$delivery_partner_blood_group','$delivery_partner_email','$aadhaar_number',1,'$hospital_name','$emergency','$first_aid_status','$accoount_name','$account_number','$bank_name','$ifsc_code')";
                 if($conn->query($sql) === TRUE){
                     $driverId = $conn->insert_id;
 
