@@ -102,20 +102,42 @@
                     if($conn->query($sql) === TRUE){
 						$request_id = $conn->insert_id;
 
+						$title = 'Hi '.$patient_name;
+						$res = sendNotificationUser($user_id, $title, "You have successfully registered as .'$bloodname' blood request !", '', $request_id, '1');
+
 						$blood_donation_sql = "SELECT * FROM blood_donation WHERE blood_group = '$blood_group'";
                         $blood_donation_result = $conn->query($blood_donation_sql);
                         if($blood_donation_result->num_rows > 0){
+
 							while($blood_donation_row = $blood_donation_result->fetch_assoc()){
 								$donor_id = $blood_donation_row['user_id'];
-                    			$title = 'Hi '.$blood_donation_row['blood_donor_name'];
-								$res = sendNotificationUser($donor_id, $title, "Urgent Need .'$bloodname'. Blood !", '', $request_id, '1');
-								$res = actionsendNotificationUser($donor_id, $title, "Urgent Need .'$bloodname'. Blood !", '', $request_id, '1');
+			
+								if($user_id != $donor_id){
+			
+									$blood_donation_id = $blood_donation_row['blood_donation_id'];
+			
+									$statusCheckSql = "SELECT * FROM rq_accept_reject WHERE donor_id='$donor_id' AND request_id='$request_id'";
+									$statusResult = $conn->query($statusCheckSql);
+									if($statusResult->num_rows == NULL){
+			
+										$donor_latitude = $blood_donation_row['donor_latitude'];
+										$donor_longitude = $blood_donation_row['donor_longitude'];
+				
+										$km = round(getDistance($latitude,$longitude,$donor_latitude,$donor_longitude));
+				
+										if($km <= 2000){
+										
+											$title = 'Hi '.$blood_donation_row['blood_donor_name'];
+											$res = sendNotificationUser($donor_id, $title, "Urgent Need .'$bloodname'. Blood !", '', $request_id, '1');
+											$res = actionsendNotificationUser($donor_id, $title, "Urgent Need .'$bloodname'. Blood !", '', $request_id, '1');
+			
+										}
+									}
+								}
+			
 							}
 						}
 						
-						// if($request_reason_id == 1){
-						// 	$request_reason_sql = "INSERT INTO request_reason_list (request_id,reason) VALUES ('$request_id','$request_reason')";
-						// }
 
                         http_response_code(200);
                         $output_array['status'] = true;

@@ -1,5 +1,6 @@
 <?php
     include("import.php");
+    include("../onesignaluser.php");
 
     if(!empty($header['authorization'])){
 		$token = $header['authorization'];
@@ -24,10 +25,42 @@
                     $date = date('d-m-Y');
                     $insertSql = "INSERT INTO rq_accept_reject (donor_id,request_id,accept_reject_date,danated_status,reject_reason) VALUES('$user_id','$request_id','$date','$status','$reason')";
                     if($conn->query($insertSql)===TRUE){
+                        $request_id = $conn->insert_id;
                         if($status == 1){
                             $msg = "Accepted";
+
+                            $blood_req_sql = "SELECT * FROM blood_request WHERE blood_request_id = '$request_id'";
+                            $blood_req_result = $conn->query($blood_req_sql);
+                            if($blood_req_result->num_rows > 0){
+                                $blood_req_row = $blood_req_result->fetch_assoc();
+                                $req_id = $blood_req_row['user_id'];
+                                $title = 'Hi '.$blood_req_row['patient_name'];
+                                $res = sendNotificationUser($req_id, $title, "we found a donor for you", '', $request_id, '1');
+                                
+                            }
+
+                            $blood_donation_sql = "SELECT * FROM blood_donation WHERE user_id = '$user_id'";
+                            $blood_donation_result = $conn->query($blood_donation_sql);
+                            if($blood_donation_result->num_rows > 0){
+						    	$blood_donation_row = $blood_donation_result->fetch_assoc();
+						    	$donor_id = $blood_donation_row['user_id'];
+                    	    	$title = 'Hi '.$blood_donation_row['blood_donor_name'];
+						    	$res = sendNotificationUser($donor_id, $title, "Blood Requested Accepted Successfully", '', $request_id, '1');
+						    	
+						    }
+
                         }elseif($status == 2){
                             $msg = "Rejected";
+
+                            $blood_donation_sql = "SELECT * FROM blood_donation WHERE user_id = '$user_id'";
+                            $blood_donation_result = $conn->query($blood_donation_sql);
+                            if($blood_donation_result->num_rows > 0){
+						    	$blood_donation_row = $blood_donation_result->fetch_assoc();
+						    	$donor_id = $blood_donation_row['user_id'];
+                    	    	$title = 'Hi '.$blood_donation_row['blood_donor_name'];
+						    	$res = sendNotificationUser($donor_id, $title, "Blood Requested Rejected Successfully", '', $request_id, '1');
+						    	
+						    }
                         }
                         http_response_code(200);
                         $output_array['status'] = true;

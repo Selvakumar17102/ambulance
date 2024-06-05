@@ -134,6 +134,12 @@
                                                 <th class="text-center">Vehicle Number</th>
                                                 <th class="text-center">License Number</th>
                                                 <th class="text-center">Aadhaar Number</th>
+
+                                                <th class="text-center">Account name</th>
+                                                <th class="text-center">Account number</th>
+                                                <th class="text-center">Bank name</th>
+                                                <th class="text-center">Ifsc code</th>
+
                                                 <th class="text-center">Local Charge (₹)</th>
                                                 <th class="text-center">Local Min Distance</th>
                                                 <th class="text-center">Local Extra Charge Per Km (₹)</th>
@@ -234,6 +240,12 @@
                                                         <td class="text-center"><?php echo $row['delivery_partner_vehicle_number'] ?></td>
                                                         <td class="text-center"><?php echo $row['license_number'] ?></td>
                                                         <td class="text-center"><?php echo $row['aadhaar_number'] ?></td>
+
+                                                        <td class="text-center"><?php echo $row['accoount_name'] ?></td>
+                                                        <td class="text-center"><?php echo $row['account_number'] ?></td>
+                                                        <td class="text-center"><?php echo $row['bank_name'] ?></td>
+                                                        <td class="text-center"><?php echo $row['ifsc_code'] ?></td>
+
                                                         <td class="text-center"><?php echo $row['local_charge'] ?></td>
                                                         <td class="text-center"><?php echo $row['local_min_distance'] ?></td>
                                                         <td class="text-center"><?php echo $row['local_extra_charge_per_km'] ?></td>
