@@ -114,20 +114,39 @@
                         
                         	$currentTime = date('H:i:s');
                         	$after_5_minutes = date('H:i:s', strtotime($request_time. '+ 5 minutes'));
-                        	$after_10_minutes = date('H:i:s', strtotime($request_time. '+ 5 minutes'));
+                        	$after_10_minutes = date('H:i:s', strtotime($request_time. '+ 10 minutes'));
     
                         	if($after_5_minutes <= $currentTime && $km <= 20){
 							
                     			$title = 'Hi '.$blood_donation_row['blood_donor_name'];
 								$res = sendNotificationUser($donor_id, $title, "Urgent Need .'$bloodname'. Blood !", '', $request_id, '1');
 								$res = actionsendNotificationUser($donor_id, $title, "Urgent Need .'$bloodname'. Blood !", '', $request_id, '1');
+								$blood_bank = $row['blood_bank_status'];
 
                         	}elseif($after_10_minutes <= $currentTime && $km <= 50){
 
                     			$title = 'Hi '.$blood_donation_row['blood_donor_name'];
 								$res = sendNotificationUser($donor_id, $title, "Urgent Need .'$bloodname'. Blood !", '', $request_id, '1');
 								$res = actionsendNotificationUser($donor_id, $title, "Urgent Need .'$bloodname'. Blood !", '', $request_id, '1');
-                        	}
+								$blood_bank = $row['blood_bank_status'];
+
+                        	}elseif($after_10_minutes >= $currentTime){
+								// $blood_bank = $row['blood_bank_status'];
+
+								// $updateSql = "UPDATE blood_request SET blood_bank_status='1' WHERE blood_request_id='$request_id'";
+								// $updateResult = $conn->query($updateSql);
+
+								// $sql = "SELECT * FROM blood_request WHERE blood_request_id='$request_id'";
+								// $result = $conn->query($sql);
+								// $row = $result->fetch_assoc();
+
+								$blood_bank = $row['blood_bank_status'];
+							}
+
+							http_response_code(200);
+							$output_array['blood_bank_status'] = $blood_bank;
+                        	$output_array['status'] = true;
+                        	$output_array['message'] = "Register Successfully!";
                     	}
 					}
 

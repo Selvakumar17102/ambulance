@@ -112,28 +112,22 @@
 							while($blood_donation_row = $blood_donation_result->fetch_assoc()){
 								$donor_id = $blood_donation_row['user_id'];
 			
-								if($user_id != $donor_id){
+								// if($user_id != $donor_id){
 			
-									$blood_donation_id = $blood_donation_row['blood_donation_id'];
-			
-									$statusCheckSql = "SELECT * FROM rq_accept_reject WHERE donor_id='$donor_id' AND request_id='$request_id'";
-									$statusResult = $conn->query($statusCheckSql);
-									if($statusResult->num_rows == NULL){
-			
-										$donor_latitude = $blood_donation_row['donor_latitude'];
-										$donor_longitude = $blood_donation_row['donor_longitude'];
+									$donor_latitude = $blood_donation_row['donor_latitude'];
+									$donor_longitude = $blood_donation_row['donor_longitude'];
 				
-										$km = round(getDistance($latitude,$longitude,$donor_latitude,$donor_longitude));
+									$km = round(getDistance($latitude,$longitude,$donor_latitude,$donor_longitude));
 				
-										if($km <= 2000){
+									if($km <= 20){
 										
-											$title = 'Hi '.$blood_donation_row['blood_donor_name'];
-											$res = sendNotificationUser($donor_id, $title, "Urgent Need .'$bloodname'. Blood !", '', $request_id, '1');
-											$res = actionsendNotificationUser($donor_id, $title, "Urgent Need .'$bloodname'. Blood !", '', $request_id, '1');
+										$title = 'Hi '.$blood_donation_row['blood_donor_name'];
+										$res = sendNotificationUser($donor_id, $title, "Urgent Need .'$bloodname'. Blood !", '', $request_id, '1');
+										$res = actionsendNotificationUser($donor_id, $title, "Urgent Need .'$bloodname'. Blood !", '', $request_id, '1');
 			
-										}
 									}
-								}
+									
+								// }
 			
 							}
 						}

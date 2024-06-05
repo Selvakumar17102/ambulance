@@ -134,6 +134,66 @@
                                                     if($row['sugar_level']){
                                                         $sugar_level = "Yes";
                                                     }
+
+                                                    switch ($row['blood_group']) {
+                                                        case '1':
+                                                            $bloodname = "A+";
+                                                            break;
+                                                        case '2':
+                                                            $bloodname = "O+";
+                                                            break;
+                                                        case '3':
+                                                            $bloodname = "B+";
+                                                            break;
+                                                        case '4':
+                                                            $bloodname = "AB+";
+                                                            break;
+                                                        case '5':
+                                                            $bloodname = "AB-";
+                                                            break;
+                                                        case '6':
+                                                            $bloodname = "O-";
+                                                            break;
+                                                        case '7':
+                                                            $bloodname = "A-";
+                                                            break;
+                                                        case '8':
+                                                            $bloodname = "B-";
+                                                            break;
+                                                        case '9':
+                                                            $bloodname = "A1+";
+                                                            break;
+                                                        case '10':
+                                                            $bloodname = "A1-";
+                                                            break;
+                                                        case '11':
+                                                            $bloodname = "A2+";
+                                                            break;
+                                                        case '12':
+                                                            $bloodname = "A2-";
+                                                            break;
+                                                        case '13':
+                                                            $bloodname = "A1B+";
+                                                            break;
+                                                        case '14':
+                                                            $bloodname = "A1B-";
+                                                            break;
+                                                        case '15':
+                                                            $bloodname = "A2B+";
+                                                            break;
+                                                        case '16':
+                                                            $bloodname = "A2B-";
+                                                            break;
+                                                        case '17':
+                                                            $bloodname = "Bombay Blood Group";
+                                                            break;
+                                                        case '18':
+                                                            $bloodname = "INRA";
+                                                            break;
+                                                        default:
+                                                            $bloodname = "Don`t Know";
+                                                            break;
+                                                    }
                                             ?>
                                                     <tr>
                                                         <td class="text-center"><?php echo $count++ ?></td>
@@ -143,7 +203,7 @@
                                                         <td class="text-center"><?php echo $row['user_email'] ?></td>
                                                         <td class="text-center"><?php echo $row['user_alternate_phone_number'] ?></td>
                                                         <td class="text-center"><?php echo date('d-m-Y', strtotime($row['user_registration_date'])) ?></td>
-                                                        <td class="text-center"><?php echo $row['blood_group'] ?></td>
+                                                        <td class="text-center"><?php echo $bloodname ?></td>
                                                         <td class="text-center"><?php echo $bp_level ?></td>
                                                         <td class="text-center"><?php echo $sugar_level ?></td>
                                                         <td class="text-center"><?php echo $thyroid ?></td>

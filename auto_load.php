@@ -2,6 +2,7 @@
     include("dashboard/include/connection.php");
     include("api/distance-calculator.php");
     include("api/onesignaluser.php");
+    include("api/actiononesignaluser.php");
     include("api/onesignaldelivery.php");
     ini_set('display_errors','on');
 	date_default_timezone_set("Asia/Calcutta");
@@ -20,7 +21,7 @@
             $after_five_minutes = date('H:i:s', strtotime($request_time. " +5 minutes"));
             $after_ten_minutes = date('H:i:s', strtotime($request_time. " +10 minutes"));
 
-            if($currentTime == $after_five_minutes){
+            if($after_5_minutes <= $currentTime){
                 $blood_donation_sql = "SELECT * FROM blood_donation WHERE blood_group != '$blood_group'";
                 $blood_donation_result = $conn->query($blood_donation_sql);
                 if($blood_donation_result->num_rows > 0){
@@ -28,10 +29,21 @@
 						$donor_id = $blood_donation_row['user_id'];
                 		$title = 'Hi '.$blood_donation_row['blood_donor_name'];
 						$res = sendNotificationUser($donor_id, $title, "Urgent Need .'$blood_group'. Blood !", '', $blood_request_id, '1');
+                        $res = actionsendNotificationUser($donor_id, $title, "Urgent Need .'$blood_group'. Blood !", '', $blood_request_id, '1');
 					}
 				}
-            }
-            elseif($currentTime == $after_ten_minutes){
+            }elseif($after_10_minutes <= $currentTime){
+                $blood_donation_sql = "SELECT * FROM blood_donation WHERE blood_group != '$blood_group'";
+                $blood_donation_result = $conn->query($blood_donation_sql);
+                if($blood_donation_result->num_rows > 0){
+					while($blood_donation_row = $blood_donation_result->fetch_assoc()){
+						$donor_id = $blood_donation_row['user_id'];
+                		$title = 'Hi '.$blood_donation_row['blood_donor_name'];
+						$res = sendNotificationUser($donor_id, $title, "Urgent Need .'$blood_group'. Blood !", '', $blood_request_id, '1');
+                        $res = actionsendNotificationUser($donor_id, $title, "Urgent Need .'$blood_group'. Blood !", '', $blood_request_id, '1');
+					}
+				}
+            }elseif($currentTime == $after_ten_minutes){
                 $bloodRequest_update_sql = "UPDATE blood_request SET blood_bank_status = '1' WHERE blood_request_id = '$blood_request_id'";
                 $conn->query($bloodRequest_update_sql);
             }

@@ -111,7 +111,7 @@
                                                     <th class="text-center">Driver</th>
                                                     <th class="text-center">Total Amount</th>
                                                     <th class="text-center">Status</th>
-                                                    <th class="text-center">Print</th>
+                                                    <!-- <th class="text-center">Print</th> -->
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -203,11 +203,11 @@
                                                                 <td class="text-center"><?php echo ucfirst($delivery_partner_name) ?></td>
                                                                 <td class="text-center">₹ <?php echo $row['total_amount'] ?></td>
                                                                 <td class="text-center"><?php echo $status ?></td>
-                                                                <td class="text-center">
+                                                                <!-- <td class="text-center">
                                                                     <center>
                                                                         <a href="print.php?id=<?php echo $row['order_id'];?>" class="btn btn-success" target="_blank">Print</a>
                                                                     </center>
-                                                                </td>
+                                                                </td> -->
                                                             </tr>
                                                 <?php
                                                         }
