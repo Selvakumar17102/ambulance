@@ -112,7 +112,7 @@
 							while($blood_donation_row = $blood_donation_result->fetch_assoc()){
 								$donor_id = $blood_donation_row['user_id'];
 			
-								// if($user_id != $donor_id){
+								if($user_id != $donor_id){
 			
 									$donor_latitude = $blood_donation_row['donor_latitude'];
 									$donor_longitude = $blood_donation_row['donor_longitude'];
@@ -127,7 +127,7 @@
 			
 									}
 									
-								// }
+								}
 			
 							}
 						}

@@ -22,6 +22,23 @@
                 if($reqresult->num_rows > 0){
                     $reqrow = $reqresult->fetch_assoc();
                     // $req_id = $reqrow['blood_request_id'];
+
+                    $request_id = $reqrow['blood_request_id'];
+                    $request_time = $reqrow['request_time'];
+
+                    $currentTime = date('H:i:s');
+                    $after_5_minutes = date('H:i:s', strtotime($request_time. '+ 5 minutes'));
+
+                    if($after_5_minutes >= $currentTime){
+                        $updateSql = "UPDATE blood_request SET blood_bank_status='1' WHERE blood_request_id='$request_id'";
+						$updateResult = $conn->query($updateSql);
+
+                        $sql = "SELECT * FROM blood_request WHERE blood_request_id='$request_id'";
+						$result = $conn->query($sql);
+						$row = $result->fetch_assoc();
+						$blood_bank = $row['blood_bank_status'];
+                    }
+
                     if(!empty($data->request_id)){
                         $req_id = $data->request_id;
                             $accSql ="SELECT * FROM rq_accept_reject a LEFT OUTER JOIN blood_donation b ON a.donor_id=b.user_id LEFT OUTER JOIN bloodlist c ON b.blood_group=c.blood_id LEFT OUTER JOIN user d ON b.user_id=d.user_id WHERE a.request_id ='$req_id'";
@@ -45,7 +62,7 @@
                             }else{
                                 http_response_code(200);
                                 $output_array['GTS'] = [];
-                                $output_array['blood_bank_status'] = $reqrow['blood_bank_status'];
+                                $output_array['blood_bank_status'] = $blood_bank;
 					            $output_array['status'] = true;
 					            $output_array['message'] = "Success Donors not Found !";
                             }

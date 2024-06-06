@@ -43,8 +43,8 @@
 
             $login_id = $row['login_id'];
 
-            $sql = "INSERT INTO branch (login_id,branch_name,branch_address,branch_latitude,branch_longitude,branch_intime,branch_outtime,branch_phone,branch_whatsapp,packing_charge,peak_charge,razorpay_merchant_id,razorpay_merchant_key) 
-            VALUES ('$login_id','$name','$address','$latitude','$longitude','$intime','$outtime','$phone','$whatsapp','$packing_charge','$peak_charge','$razorpay_merchant_id','$razorpay_merchant_key')";
+            $sql = "INSERT INTO branch (login_id,branch_name,branch_address,branch_latitude,branch_longitude,branch_intime,branch_outtime,branch_phone,branch_whatsapp,razorpay_merchant_id,razorpay_merchant_key) 
+            VALUES ('$login_id','$name','$address','$latitude','$longitude','$intime','$outtime','$phone','$whatsapp','$razorpay_merchant_id','$razorpay_merchant_key')";
             if($conn->query($sql) === TRUE){
 
                 $sql = "SELECT * FROM branch ORDER BY branch_id DESC LIMIT 1";
@@ -89,15 +89,15 @@
         $intime = $_POST['intime'];
         $outtime = $_POST['outtime'];
         // $gst = $_POST['gst'];
-        $packing_charge = $_POST['packing_charge'];
-        $peak_charge = $_POST['peak_charge'];
+        // $packing_charge = $_POST['packing_charge'];
+        // $peak_charge = $_POST['peak_charge'];
 
         $razorpay_merchant_id = $_POST['razorpay_merchant_id'];
         $razorpay_merchant_key = $_POST['razorpay_merchant_key'];
 
         $sql = "UPDATE login SET login_phone_number='$phone' WHERE login_id='$login_id'";
         if($conn->query($sql) === TRUE){
-            $sql = "UPDATE branch SET razorpay_merchant_id='$razorpay_merchant_id',razorpay_merchant_key='$razorpay_merchant_key',branch_name='$name',branch_address='$address',branch_latitude='$latitude',branch_longitude='$longitude',branch_intime='$intime',branch_outtime='$outtime',branch_phone='$phone',branch_whatsapp='$whatsapp',packing_charge='$packing_charge',peak_charge='$peak_charge' WHERE login_id='$login_id'";
+            $sql = "UPDATE branch SET razorpay_merchant_id='$razorpay_merchant_id',razorpay_merchant_key='$razorpay_merchant_key',branch_name='$name',branch_address='$address',branch_latitude='$latitude',branch_longitude='$longitude',branch_intime='$intime',branch_outtime='$outtime',branch_phone='$phone',branch_whatsapp='$whatsapp' WHERE login_id='$login_id'";
             if($conn->query($sql) === TRUE){
 
                 $sql = "SELECT * FROM branch WHERE login_id='$login_id'";
@@ -316,18 +316,18 @@
                                                                     <input type="number" min="0" name="whatsapp" id="whatsapp" placeholder="WhatsApp Number" autocomplete="off" class="form-control">
                                                                    
                                                                 </div>
-                                                                <div class="col-sm-6">
+                                                                <!-- <div class="col-sm-6">
                                                                     <label>Packing Charge</label>
                                                                     <input type="number" min="0" name="packing_charge" id="packing_charge" placeholder="Packing Charge" autocomplete="off" class="form-control">
                                                                    
-                                                                </div>
+                                                                </div> -->
                                                             </div>
                                                             <div class="row mt-1">
-                                                                <div class="col-sm-12">
+                                                                <!-- <div class="col-sm-12">
                                                                 <label>Peak Charge</label>
                                                                     <input type="number" min="0" name="peak_charge" id="peak_charge" placeholder="Peak Charge" autocomplete="off" class="form-control">
                                                                    
-                                                                </div>
+                                                                </div> -->
                                                                 <!-- <div class="col-sm-6">
                                                                     <input type="text" name="gst" id="gst" placeholder="GST No" class="form-control">
                                                                    
@@ -479,18 +479,18 @@
                                                                                             <input type="number" min="0" name="whatsapp" id="whatsapp<?php echo $login_id ?>" placeholder="WhatsApp Number" autocomplete="off" class="form-control" value="<?php echo $row['branch_whatsapp'] ?>">
                                                                                            
                                                                                         </div>
-                                                                                        <div class="col-sm-6">
+                                                                                        <!-- <div class="col-sm-6">
                                                                                         <label>Packing Charge</label>
                                                                                             <input type="number" min="0" name="packing_charge" id="packing_charge<?php echo $login_id ?>" placeholder="Packing Charge" autocomplete="off" class="form-control" value="<?php echo $row['packing_charge'] ?>">
                                                                                            
-                                                                                        </div>
+                                                                                        </div> -->
                                                                                     </div>
                                                                                     <div class="row mt-1">
-                                                                                        <div class="col-sm-12">
+                                                                                        <!-- <div class="col-sm-12">
                                                                                         <label>Peak Charge</label>
                                                                                             <input type="number" min="0" name="peak_charge" id="peak_charge<?php echo $login_id ?>" placeholder="Peak Charge" autocomplete="off" class="form-control"value="<?php echo $row['peak_charge'] ?>">
                                                                                            
-                                                                                        </div>
+                                                                                        </div> -->
                                                                                         <!-- <div class="col-sm-12">
                                                                                             <input type="text" name="gst" id="gst" placeholder="GST No" class="form-control" value="<?php echo $row['gst'] ?>">
                                                                                            
